@@ -14,35 +14,12 @@ const app = express();
 // Conectar a MongoDB
 connectDB();
 
-// Configuración de CORS
+// Configuración de CORS simplificada y permisiva
 const corsOptions = {
-  origin: function (origin, callback) {
-    // En desarrollo, permitir todos los orígenes
-    if (process.env.NODE_ENV === 'development') {
-      return callback(null, true);
-    }
-    
-    // Permitir requests sin origin (aplicaciones móviles, Postman, etc.)
-    if (!origin) return callback(null, true);
-    
-    const allowedOrigins = [
-      'http://localhost:3000',
-      'http://localhost:3001',
-      'http://localhost:5173', // Vite default
-      'https://voleyapi.somee.com',
-      process.env.FRONTEND_URL
-    ].filter(Boolean);
-
-    if (allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      console.log(`🚫 CORS bloqueó origen: ${origin}`);
-      callback(new Error('No permitido por política CORS'));
-    }
-  },
+  origin: true, // Permite todos los orígenes en desarrollo
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin', 'Cache-Control'],
   optionsSuccessStatus: 200 // Para navegadores legacy
 };
 
@@ -51,20 +28,6 @@ app.use(cors(corsOptions));
 
 // Middleware adicional para preflight requests
 app.options('*', cors(corsOptions));
-
-// Middleware para agregar headers CORS manualmente (redundancia)
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With, Accept, Origin');
-  res.header('Access-Control-Allow-Credentials', 'true');
-  
-  if (req.method === 'OPTIONS') {
-    res.sendStatus(200);
-  } else {
-    next();
-  }
-});
 
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
