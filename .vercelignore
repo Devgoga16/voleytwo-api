@@ -1,0 +1,32 @@
+# Archivos de desarrollo
+node_modules
+.env
+.env.local
+.env.development
+.env.test
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Archivos de IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Archivos temporales
+temp/
+tmp/
+*.tmp
+
+# Documentación local (opcional)
+README.md
+migrate-data.js
+
+# Directorios de uploads (no se usan en serverless)
+uploads/
