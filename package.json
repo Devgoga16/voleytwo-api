@@ -11,7 +11,14 @@
     "build": "echo 'No build step required for Vercel'",
     "vercel-deploy": "vercel --prod",
     "test": "node test-api.js",
-    "test:local": "BASE_URL=http://localhost:3001 node test-api.js"
+    "test:local": "BASE_URL=http://localhost:3001 node test-api.js",
+    "docker:build": "docker build -t voleyfund-api .",
+    "docker:run": "docker run -d -p 3000:3000 --env-file .env --name voleyfund-api voleyfund-api",
+    "docker:stop": "docker stop voleyfund-api && docker rm voleyfund-api",
+    "docker:logs": "docker logs -f voleyfund-api",
+    "docker:compose": "docker-compose up -d",
+    "docker:compose:down": "docker-compose down",
+    "docker:compose:logs": "docker-compose logs -f api"
   },
   "keywords": [
     "express",

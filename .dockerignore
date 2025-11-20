@@ -1,0 +1,39 @@
+# Node modules
+node_modules
+npm-debug.log
+
+# Git
+.git
+.gitignore
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Vercel files
+.vercel
+.vercelignore
+vercel.json
+
+# Testing
+test-api.js
+
+# Development
+.vscode
+*.log
+
+# Documentation
+README.md
+VERCEL-README.md
+
+# Uploads (will be created at runtime)
+uploads/*
+!uploads/.gitkeep
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# CI/CD
+.github
