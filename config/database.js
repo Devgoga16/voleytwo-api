@@ -5,6 +5,10 @@ const connectDB = async () => {
     const conn = await mongoose.connect(process.env.MONGODB_URI, {
       useUnifiedTopology: true,
       useNewUrlParser: true,
+      serverSelectionTimeoutMS: 10000,
+      socketTimeoutMS: 45000,
+      maxPoolSize: 10,
+      minPoolSize: 2,
     });
 
     console.log(`✅ MongoDB conectado: ${conn.connection.host}:${conn.connection.port}`);
@@ -37,7 +41,9 @@ const connectDB = async () => {
 
   } catch (error) {
     console.error('❌ Error conectando a MongoDB:', error.message);
-    process.exit(1);
+    console.error('⚠️ La aplicación continuará sin conexión a la base de datos');
+    console.error('⚠️ Verifica tu MONGODB_URI en las variables de entorno');
+    // No hacer exit para que Dokploy pueda mostrar los logs
   }
 };
 

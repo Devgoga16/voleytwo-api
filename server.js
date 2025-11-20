@@ -79,15 +79,16 @@ app.use(errorHandler);
 
 // Configuración del puerto
 const PORT = process.env.PORT || 3000;
+const HOST = process.env.HOST || '0.0.0.0';
 
 // Iniciar servidor
-const server = app.listen(PORT, () => {
+const server = app.listen(PORT, HOST, () => {
   console.log('🚀 =================================');
   console.log(`🏐 VolleyFund API iniciado`);
   console.log(`🌐 Entorno: ${process.env.NODE_ENV || 'development'}`);
   console.log(`📡 Puerto: ${PORT}`);
-  console.log(`📚 Documentación: http://localhost:${PORT}/api-docs`);
-  console.log(`🔗 URL base: http://localhost:${PORT}`);
+  console.log(`🖥️  Host: ${HOST}`);
+  console.log(`📚 Documentación: /api-docs`);
   console.log('🚀 =================================');
 });
 
